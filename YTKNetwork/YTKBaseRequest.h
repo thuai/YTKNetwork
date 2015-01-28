@@ -130,6 +130,8 @@ typedef void (^AFDownloadProgressBlock)(AFDownloadRequestOperation *operation, N
 /// 请求的BaseURL
 - (NSString *)baseUrl;
 
+- (NSInteger)returnCode;
+
 /// 请求的连接超时时间，默认为60秒
 - (NSTimeInterval)requestTimeoutInterval;
 

@@ -46,6 +46,11 @@
     return @"";
 }
 
+- (NSInteger)returnCode
+{
+    return 0;
+}
+
 - (NSTimeInterval)requestTimeoutInterval {
     return 60;
 }
