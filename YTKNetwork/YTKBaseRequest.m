@@ -135,14 +135,14 @@
     return self.requestOperation.isExecuting;
 }
 
-- (void)startWithCompletionBlockWithSuccess:(void (^)(YTKBaseRequest *request))success
-                                    failure:(void (^)(YTKBaseRequest *request))failure {
+- (void)startWithCompletionBlockWithSuccess:(YTKRequestCompletionBlock)success
+                                    failure:(YTKRequestCompletionBlock)failure {
     [self setCompletionBlockWithSuccess:success failure:failure];
     [self start];
 }
 
-- (void)setCompletionBlockWithSuccess:(void (^)(YTKBaseRequest *request))success
-                              failure:(void (^)(YTKBaseRequest *request))failure {
+- (void)setCompletionBlockWithSuccess:(YTKRequestCompletionBlock)success
+                              failure:(YTKRequestCompletionBlock)failure {
     self.successCompletionBlock = success;
     self.failureCompletionBlock = failure;
 }
@@ -155,6 +155,10 @@
 
 - (id)responseJSONObject {
     return self.requestOperation.responseObject;
+}
+
+- (NSData *)responseData {
+    return self.requestOperation.responseData;
 }
 
 - (NSString *)responseString {

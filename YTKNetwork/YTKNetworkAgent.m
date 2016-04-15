@@ -48,6 +48,7 @@
         _manager = [AFHTTPRequestOperationManager manager];
         _requestsRecord = [NSMutableDictionary dictionary];
         _manager.operationQueue.maxConcurrentOperationCount = 4;
+        _manager.securityPolicy = _config.securityPolicy;
     }
     return self;
 }
@@ -195,6 +196,21 @@
         }
     }
 
+    // Set request operation priority
+    switch (request.requestPriority) {
+        case YTKRequestPriorityHigh:
+            request.requestOperation.queuePriority = NSOperationQueuePriorityHigh;
+            break;
+        case YTKRequestPriorityLow:
+            request.requestOperation.queuePriority = NSOperationQueuePriorityLow;
+            break;
+        case YTKRequestPriorityDefault:
+        default:
+            request.requestOperation.queuePriority = NSOperationQueuePriorityNormal;
+            break;
+    }
+
+    // retain operation
     YTKLog(@"Add request: %@", NSStringFromClass([request class]));
     [self addOperation:request];
 }
